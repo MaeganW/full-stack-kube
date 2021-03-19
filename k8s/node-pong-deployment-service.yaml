@@ -1,35 +1,35 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-    name: react-pong
+    name: node-pong
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: react-pong
+            app: node-pong
     template:
         metadata:
             labels:
-                app: react-pong
+                app: node-pong
         spec:
             containers:
-                - name: react-pong
-                  image: maeganwomble/react-pong
+                - name: node-pong
+                  image: maeganwomble/node-pong
                   imagePullPolicy: Always
                   ports:
-                      - containerPort: 80
+                      - containerPort: 3001
             restartPolicy: Always
 ---
 kind: Service
 apiVersion: v1
 metadata:
-    name: react-pong
+    name: node-pong
 spec:
     type: NodePort
     ports:
-        - port: 80
-          targetPort: 80
+        - port: 3001
+          targetPort: 3001
           protocol: TCP
-          nodePort: 30002
+          nodePort: 30001
     selector:
-        app: react-pong
+        app: node-pong
